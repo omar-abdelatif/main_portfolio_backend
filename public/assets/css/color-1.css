@@ -1,0 +1,6 @@
+.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li:first-child{
+    display: block !important;
+}
+.text-right{
+    text-align: right !important;
+}

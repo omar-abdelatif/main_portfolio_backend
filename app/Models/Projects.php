@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Projects extends Model
+{
+    protected $fillable = [
+        'name',
+        'slug',
+        'link',
+        'tags',
+        'image',
+        'category',
+        'subcategory',
+        'description',
+        'categories_id',
+    ];
+    public function categories() {
+        return $this->belongsTo(Categories::class, 'categories_id');
+    }
+}
