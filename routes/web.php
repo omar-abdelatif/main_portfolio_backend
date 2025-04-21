@@ -16,7 +16,6 @@ Route::view('/', 'auth.login');
 Route::get('/register', function () {
     abort(404);
 });
-
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
@@ -64,7 +63,6 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
         Route::get('/skills/delete/{id}', 'destroy')->name('skills.destroy');
     });
 });
-
 Route::middleware('api.key')->prefix('api/v1')->group(function () {
     Route::controller(ApiController::class)->group(function () {
         Route::get('/projects', 'allProjects')->name('api.projects.all');
@@ -74,5 +72,4 @@ Route::middleware('api.key')->prefix('api/v1')->group(function () {
         Route::get('/payment/methods', 'paymentMethods')->name('api.payment.methods');
     });
 });
-
 require __DIR__.'/auth.php';
