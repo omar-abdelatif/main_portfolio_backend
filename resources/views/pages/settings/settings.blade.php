@@ -60,27 +60,32 @@
                                             @csrf
                                             <div class="form-group mb-3">
                                                 <label for="developer_name" class="form-label">Developer Name</label>
-                                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Developer Name" value=""/>
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Developer Name" value="{{$aboutdata->name}}"/>
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label for="developer_name" class="form-label">Developer Email</label>
-                                                <input type="email" class="form-control" id="name" name="email" placeholder="Enter Developer Email" value=""/>
+                                                <label for="developer_email" class="form-label">Developer Email</label>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Developer Email" value="{{$aboutdata->email}}"/>
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="developer_position" class="form-label">Developer Position</label>
-                                                <input type="text" name="position" id="postion" class="form-control" placeholder="Developer Position" value="">
+                                                <input type="text" name="position" id="postion" class="form-control" placeholder="Developer Position" value="{{$aboutdata->position}}">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="developer_nationality" class="form-label">Developer Nationality</label>
-                                                <input type="text" name="nationality" id="postion" class="form-control" placeholder="Developer Nationality" value="">
+                                                <input type="text" name="nationality" id="nationality" class="form-control" placeholder="Developer Nationality" value="{{$aboutdata->nationality}}">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="developer_phone" class="form-label">Developer Phone</label>
-                                                <input type="number" name="phone" id="postion" class="form-control" placeholder="Developer Phone" value="">
+                                                <input type="number" name="phone" id="phone" class="form-control" placeholder="Developer Phone" value="{{$aboutdata->phone}}">
                                             </div>
+                                            @isset($aboutdata->about_img)
+                                            <div class="view-img text-center mb-3">
+                                                <img src="{{asset($aboutdata->about_img)}}" class="img-fluid" width="80" alt="{{$aboutdata->name}} Image">
+                                            </div>
+                                            @endisset
                                             <div class="form-group mb-3">
                                                 <label for="aboutt-img" class="form-label fw-bold">About Image</label>
-                                                <input type="file" name="about_img" id="about-img" class="form-control" accept="image/*" value="">
+                                                <input type="file" name="about_img" id="about-img" class="form-control" accept="image/*" value="{{$aboutdata->about_img}}">
                                             </div>
                                             <div class="form-footer">
                                                 <button type="submit" class="btn btn-primary mt-3 w-100 fw-bold fs-6">Save</button>

@@ -17,7 +17,9 @@ class SettingController extends Controller
         $apiKey = $api->first();
         $platforms = Social::all()->keyBy('platform');
         $paymentMethods = PaymentMethods::all()->keyBy('methods_name');
-        return view('pages.settings.settings', compact('apiKey', 'platforms', 'paymentMethods'));
+        $about = About::all();
+        $aboutdata = $about->first();
+        return view('pages.settings.settings', compact('apiKey', 'platforms', 'paymentMethods', 'aboutdata'));
     }
     public function apiRequest(Request $request){
         $apiKey = ApiKey::find($request->id);
@@ -123,27 +125,46 @@ class SettingController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'required|numeric|unique:about,phone',
+            'phone' => 'required|numeric',
             'position' => 'required|string|max:255',
             'nationality' => 'required|string|max:1000',
             'about_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
+
+        // Find existing record or create new instance
+        $about = About::first();
+        $imageUrl = null;
+
         if ($request->hasFile('about_img')) {
             $imageFile = $request->file('about_img');
             $imageName = time() . '.' . $imageFile->extension();
             $imagePath = $imageFile->storeAs('about-img', $imageName, 'public');
             $imageUrl = Storage::url($imagePath);
-            $request->merge(['about_img' => $imageUrl]);
+
+            // Delete old image if exists
+            if ($about && $about->about_img) {
+                $oldImagePath = str_replace('/storage/', '', $about->about_img);
+                if (Storage::disk('public')->exists($oldImagePath)) {
+                    Storage::disk('public')->delete($oldImagePath);
+                }
+            }
         }
-        $update = About::firstOrNew([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'position' => $request->position,
-            'nationality' => $request->nationality,
-        ]);
-        if ($update->exists) {
-            $save = $update->update($request->all());
+
+        if ($about) {
+            // Update existing record
+            $about->name = $request->name;
+            $about->email = $request->email;
+            $about->phone = $request->phone;
+            $about->position = $request->position;
+            $about->nationality = $request->nationality;
+
+            // Only update image if a new one was uploaded
+            if ($imageUrl) {
+                $about->about_img = $imageUrl;
+            }
+
+            $save = $about->save();
+
             if ($save) {
                 sweetalert()->success('Updated Successfully', [
                     'customClass' => [
@@ -153,7 +174,16 @@ class SettingController extends Controller
                 return redirect()->back();
             }
         } else {
-            $store = About::create($request->all());
+            // Create new record
+            $store = About::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'position' => $request->position,
+                'nationality' => $request->nationality,
+                'about_img' => $imageUrl,
+            ]);
+
             if ($store) {
                 sweetalert()->success('Added Successfully', [
                     'customClass' => [
@@ -163,6 +193,7 @@ class SettingController extends Controller
                 return redirect()->back();
             }
         }
+
         sweetalert()->error('Failed to update or create about information', [
             'customClass' => [
                 'confirmButton' => 'text-white'
