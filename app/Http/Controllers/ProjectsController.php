@@ -70,7 +70,6 @@ class ProjectsController extends Controller
                 $imageUrl = Storage::url($imagePath);
                 $projects->image = $imageUrl;
             }
-
             $tags = array_filter(explode(',', $request->input('tags')));
             $update = $projects->update([
                 'name' => $request->name,

@@ -11,6 +11,4 @@ class SocialController extends Controller
     {
         return view('pages.settings.settings');
     }
-
-    
 }
