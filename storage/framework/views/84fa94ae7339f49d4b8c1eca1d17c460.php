@@ -28,5 +28,5 @@ foreach ($attributes->all() as $__key => $__value) {
 
 unset($__defined_vars); ?>
 
-<input <?php if($disabled): echo 'disabled'; endif; ?> <?php echo e($attributes->merge(['class' => 'form-control text-white'])); ?>>
+<input <?php if($disabled): echo 'disabled'; endif; ?> <?php echo e($attributes->merge(['class' => 'form-control'])); ?>>
 <?php /**PATH D:\html-css-js\Laravel-Projects\Not_Yet\portfolio\resources\views/components/text-input.blade.php ENDPATH**/ ?>

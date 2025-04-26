@@ -71,12 +71,12 @@
                                                 <input type="text" name="position" id="postion" class="form-control" placeholder="Developer Position" value="">
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label for="developer_position" class="form-label">Developer Nationality</label>
+                                                <label for="developer_nationality" class="form-label">Developer Nationality</label>
                                                 <input type="text" name="nationality" id="postion" class="form-control" placeholder="Developer Nationality" value="">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="developer_phone" class="form-label">Developer Phone</label>
-                                                <input type="number" name="mobile" id="postion" class="form-control" placeholder="Developer Phone" value="">
+                                                <input type="number" name="phone" id="postion" class="form-control" placeholder="Developer Phone" value="">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label for="aboutt-img" class="form-label fw-bold">About Image</label>
