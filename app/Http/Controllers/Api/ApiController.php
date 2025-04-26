@@ -9,7 +9,6 @@ use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethods;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
 
 class ApiController extends Controller
 {
