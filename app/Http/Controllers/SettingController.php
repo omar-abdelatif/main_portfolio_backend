@@ -150,5 +150,11 @@ class SettingController extends Controller
             ]);
             return redirect()->back();
         }
+        sweetalert()->error('Failed to update', [
+            'customClass' => [
+                'confirmButton' => 'text-white'
+            ]
+        ]);
+        return redirect()->back();
     }
 }
