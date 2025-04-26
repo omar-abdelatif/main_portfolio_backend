@@ -35,20 +35,4 @@ class ApiController extends Controller
         $paymentMethods = PaymentMethods::all();
         return response()->json($paymentMethods);
     }
-    public function sendEmail(Request $request){
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'message' => 'required|string|max:1000',
-            'phone' => 'required|string|max:20',
-        ]);
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'message' => $request->message,
-            'phone' => $request->phone,
-        ];
-        Mail::to('max_payne9494@yahoo.com')->send(new ContactMail($data));
-        return response()->json(['message' => 'Email sent successfully']);
-    }
 }
