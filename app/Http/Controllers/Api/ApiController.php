@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\About;
 use App\Models\Social;
 use App\Models\Pricing;
 use App\Models\Projects;
@@ -32,5 +33,9 @@ class ApiController extends Controller
     public function paymentMethods(){
         $paymentMethods = PaymentMethods::all();
         return response()->json($paymentMethods);
+    }
+    public function aboutDev(){
+        $about = About::all();
+        return response()->json($about);
     }
 }

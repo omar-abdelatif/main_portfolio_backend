@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\ApiKey;
-use App\Models\PaymentMethods;
 use App\Models\Social;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\PaymentMethods;
 use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
@@ -127,5 +128,27 @@ class SettingController extends Controller
             'nationality' => 'required|string|max:1000',
             'about_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
+        if ($request->hasFile('about_img')) {
+            $imageFile = $request->file('about_img');
+            $imageName = time() . '.' . $imageFile->extension();
+            $imagePath = $imageFile->storeAs('about-img', $imageName, 'public');
+            $imageUrl = Storage::url($imagePath);
+            $request->merge(['about_img' => $imageUrl]);
+        }
+        $update = About::firstOrNew([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'position' => $request->position,
+            'nationality' => $request->nationality,
+        ]);
+        if ($update) {
+            sweetalert()->success('Updated Successfully', [
+                'customClass' => [
+                    'confirmButton' => 'text-white'
+                ]
+            ]);
+            return redirect()->back();
+        }
     }
 }
