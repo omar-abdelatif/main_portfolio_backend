@@ -10,7 +10,6 @@ class Categories extends Model
         'name',
         'slug'
     ];
-
     public function projects() {
         return $this->hasMany(Projects::class, 'categories_id', 'id');
     }
