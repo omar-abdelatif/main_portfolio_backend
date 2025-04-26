@@ -142,15 +142,28 @@ class SettingController extends Controller
             'position' => $request->position,
             'nationality' => $request->nationality,
         ]);
-        if ($update) {
-            sweetalert()->success('Updated Successfully', [
-                'customClass' => [
-                    'confirmButton' => 'text-white'
-                ]
-            ]);
-            return redirect()->back();
+        if ($update->exists) {
+            $save = $update->update($request->all());
+            if ($save) {
+                sweetalert()->success('Updated Successfully', [
+                    'customClass' => [
+                        'confirmButton' => 'text-white'
+                    ]
+                ]);
+                return redirect()->back();
+            }
+        } else {
+            $store = About::create($request->all());
+            if ($store) {
+                sweetalert()->success('Added Successfully', [
+                    'customClass' => [
+                        'confirmButton' => 'text-white'
+                    ]
+                ]);
+                return redirect()->back();
+            }
         }
-        sweetalert()->error('Failed to update', [
+        sweetalert()->error('Failed to update or create about information', [
             'customClass' => [
                 'confirmButton' => 'text-white'
             ]
