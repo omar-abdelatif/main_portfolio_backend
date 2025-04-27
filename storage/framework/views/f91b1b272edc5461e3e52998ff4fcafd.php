@@ -31,27 +31,20 @@
                         <div class="flex-grow-1">
                             <span><?php echo e($user->name); ?></span>
                             <p class="mb-0">
-                                Admin
                                 <i class="middle fa-solid fa-angle-down"></i>
                             </p>
                         </div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
                         <li>
-                            <a href="javascript:void(0)">
+                            <a href="<?php echo e(route('profile.edit')); ?>">
                                 <i data-feather="user"></i>
-                                <span>Account </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <i data-feather="settings"></i>
-                                <span>Settings</span>
+                                <span>Profile </span>
                             </a>
                         </li>
                         <li>
                             <a href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i data-feather="settings"></i>
+                                <i data-feather="log-in"> </i>
                                 Logout
                             </a>
                             <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
