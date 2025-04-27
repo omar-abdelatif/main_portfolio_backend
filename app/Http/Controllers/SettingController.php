@@ -8,7 +8,6 @@ use App\Models\Social;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethods;
-use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -58,16 +57,19 @@ class SettingController extends Controller
             $socialLink->status = $request->has($statusField) ? 'active' : 'inactive';
             $imageField = $platform . '_image';
             if ($request->hasFile($imageField)) {
+                // Delete old image if exists
                 if ($socialLink->platform_icon) {
-                    $oldImagePath = str_replace('/storage/', '', $socialLink->platform_icon);
-                    if (Storage::disk('public')->exists($oldImagePath)) {
-                        Storage::disk('public')->delete($oldImagePath);
+                    $oldImageName = basename($socialLink->platform_icon);
+                    $oldPath = public_path('assets/images/social-icons/' . $oldImageName);
+                    if (file_exists($oldPath)) {
+                        unlink($oldPath);
                     }
                 }
                 $imageFile = $request->file($imageField);
                 $imageName = $platform . '_' . time() . '.' . $imageFile->extension();
-                $imagePath = $imageFile->storeAs('social-icons', $imageName, 'public');
-                $socialLink->platform_icon = Storage::url($imagePath);
+                $destinationPath = 'assets/images/social-icons/';
+                $imageFile->move(public_path($destinationPath), $imageName);
+                $socialLink->platform_icon = asset($destinationPath . $imageName);
             }
             $update = $socialLink->save();
         }
@@ -100,15 +102,17 @@ class SettingController extends Controller
             $imageField = $method . '_image';
             if ($request->hasFile($imageField)) {
                 if ($payment->methods_icon) {
-                    $oldImagePath = str_replace('/storage/', '', $payment->methods_icon);
-                    if (Storage::disk('public')->exists($oldImagePath)) {
-                        Storage::disk('public')->delete($oldImagePath);
+                    $oldImageName = basename($payment->methods_icon);
+                    $oldPath = public_path('assets/images/payment-icons/' . $oldImageName);
+                    if (file_exists($oldPath)) {
+                        unlink($oldPath);
                     }
                 }
                 $imageFile = $request->file($imageField);
                 $imageName = $method . '_' . time() . '.' . $imageFile->extension();
-                $imagePath = $imageFile->storeAs('payment-icons', $imageName, 'public');
-                $payment->methods_icon = Storage::url($imagePath);
+                $destinationPath = 'assets/images/payment-icons/';
+                $imageFile->move(public_path($destinationPath), $imageName);
+                $payment->methods_icon = asset($destinationPath . $imageName);
             }
             $update = $payment->save();
         }
@@ -130,41 +134,32 @@ class SettingController extends Controller
             'nationality' => 'required|string|max:1000',
             'about_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
-
-        // Find existing record or create new instance
         $about = About::first();
         $imageUrl = null;
-
         if ($request->hasFile('about_img')) {
-            $imageFile = $request->file('about_img');
-            $imageName = time() . '.' . $imageFile->extension();
-            $imagePath = $imageFile->storeAs('about-img', $imageName, 'public');
-            $imageUrl = Storage::url($imagePath);
-
-            // Delete old image if exists
             if ($about && $about->about_img) {
-                $oldImagePath = str_replace('/storage/', '', $about->about_img);
-                if (Storage::disk('public')->exists($oldImagePath)) {
-                    Storage::disk('public')->delete($oldImagePath);
+                $oldImageName = basename($about->about_img);
+                $oldPath = public_path('assets/images/about-img/' . $oldImageName);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
                 }
             }
+            $imageFile = $request->file('about_img');
+            $imageName = time() . '.' . $imageFile->extension();
+            $destinationPath = 'assets/images/about-img/';
+            $imageFile->move(public_path($destinationPath), $imageName);
+            $imageUrl = asset($destinationPath . $imageName);
         }
-
         if ($about) {
-            // Update existing record
             $about->name = $request->name;
             $about->email = $request->email;
             $about->phone = $request->phone;
             $about->position = $request->position;
             $about->nationality = $request->nationality;
-
-            // Only update image if a new one was uploaded
             if ($imageUrl) {
                 $about->about_img = $imageUrl;
             }
-
             $save = $about->save();
-
             if ($save) {
                 sweetalert()->success('Updated Successfully', [
                     'customClass' => [
@@ -174,7 +169,6 @@ class SettingController extends Controller
                 return redirect()->back();
             }
         } else {
-            // Create new record
             $store = About::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -183,7 +177,6 @@ class SettingController extends Controller
                 'nationality' => $request->nationality,
                 'about_img' => $imageUrl,
             ]);
-
             if ($store) {
                 sweetalert()->success('Added Successfully', [
                     'customClass' => [
@@ -193,7 +186,6 @@ class SettingController extends Controller
                 return redirect()->back();
             }
         }
-
         sweetalert()->error('Failed to update or create about information', [
             'customClass' => [
                 'confirmButton' => 'text-white'

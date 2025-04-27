@@ -6,7 +6,6 @@ use App\Models\Projects;
 use App\Models\Categories;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProjectsController extends Controller
 {
@@ -27,11 +26,13 @@ class ProjectsController extends Controller
         ]);
         $slug = Str::slug($request->name, '-');
         $category = Categories::where('name', $request->category)->first();
+        $imageUrl = null;
         if($request->hasFile('image')) {
             $imageFile = $request->file('image');
-            $imageName = time() . '.' . $imageFile->extension();
-            $imagePath = $imageFile->storeAs('images', $imageName, 'public');
-            $imageUrl = Storage::url($imagePath);
+            $imageName = time() . '_' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
+            $destinationPath = 'assets/images/projects/';
+            $imageFile->move(public_path($destinationPath), $imageName);
+            $imageUrl = asset($destinationPath . $imageName);
         }
         $store = Projects::create([
             'name' => $request->name,
@@ -61,13 +62,18 @@ class ProjectsController extends Controller
             }
             $category = Categories::where('name', $request->category)->first();
             if ($request->hasFile('image')) {
-                if ($projects->image && Storage::disk('public')->exists(str_replace('/storage/', '', $projects->image))) {
-                    Storage::disk('public')->delete(str_replace('/storage/', '', $projects->image));
+                if ($projects->image !== null) {
+                    $oldImageName = basename($projects->image);
+                    $oldPath = public_path('assets/images/projects/' . $oldImageName);
+                    if (file_exists($oldPath)) {
+                        unlink($oldPath);
+                    }
                 }
                 $imageFile = $request->file('image');
-                $imageName = time() . '.' . $imageFile->extension();
-                $imagePath = $imageFile->storeAs('images', $imageName, 'public');
-                $imageUrl = Storage::url($imagePath);
+                $imageName = time() . '_' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
+                $destinationPath = 'assets/images/projects/';
+                $imageFile->move(public_path($destinationPath), $imageName);
+                $imageUrl = asset($destinationPath . $imageName);
                 $projects->image = $imageUrl;
             }
             $tags = array_filter(explode(',', $request->input('tags')));
@@ -94,9 +100,10 @@ class ProjectsController extends Controller
         $projects = Projects::find($id);
         if($projects){
             if ($projects->image) {
-                $imagePath = str_replace('/storage/', '', $projects->image);
-                if (Storage::disk('public')->exists($imagePath)) {
-                    Storage::disk('public')->delete($imagePath);
+                $oldImageName = basename($projects->image);
+                $oldPath = public_path('assets/images/projects/' . $oldImageName);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
                 }
             }
             $delete = $projects->delete();

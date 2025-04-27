@@ -192,6 +192,11 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-12">
+                                                                @isset($project->image)
+                                                                    <div class="view-image my-3">
+                                                                        <img src="{{asset($project->image)}}" width="80" class="rounded" alt="{{$project->name}}">
+                                                                    </div>
+                                                                @endisset
                                                                 <div class="form-group mt-2">
                                                                     <x-input-label for="project_image" value="Project Image" />
                                                                     <x-text-input type="file" name="image" id="project_image" value="{{$project->image}}" accept="image/*" />

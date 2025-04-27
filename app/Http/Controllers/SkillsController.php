@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Skills;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class SkillsController extends Controller
 {
@@ -18,11 +17,13 @@ class SkillsController extends Controller
             'level' => 'required|numeric|min:1|max:100',
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
+        $imageUrl = null;
         if ($request->hasFile('image')) {
             $imageFile = $request->file('image');
             $imageName = time() . '_' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
-            $imagePath = $imageFile->storeAs('images/skills', $imageName, 'public');
-            $imageUrl = Storage::url($imagePath);
+            $destinationPath = 'assets/images/skills/';
+            $imageFile->move(public_path($destinationPath), $imageName);
+            $imageUrl = asset($destinationPath . $imageName);
         }
         $createdSkill = Skills::create([
             'name'  => $request->name,
@@ -48,16 +49,19 @@ class SkillsController extends Controller
                 $skill->level = $request->level;
             }
             if ($request->hasFile('image')) {
+                // Extract the filename from the stored URL
                 if ($skill->image) {
-                    $oldPath = str_replace('/storage/', '', $skill->image);
-                    if (Storage::disk('public')->exists($oldPath)) {
-                        Storage::disk('public')->delete($oldPath);
+                    $oldImageName = basename($skill->image);
+                    $oldPath = public_path('assets/images/skills/' . $oldImageName);
+                    if (file_exists($oldPath)) {
+                        unlink($oldPath);
                     }
                 }
                 $imageFile = $request->file('image');
                 $imageName = time() . '_' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
-                $imagePath = $imageFile->storeAs('images/skills', $imageName, 'public');
-                $imageUrl = Storage::url($imagePath);
+                $destinationPath = 'assets/images/skills/';
+                $imageFile->move(public_path($destinationPath), $imageName);
+                $imageUrl = asset($destinationPath . $imageName);
                 $skill->image = $imageUrl;
             }
             if ($skill->save()) {
@@ -74,9 +78,10 @@ class SkillsController extends Controller
         $skill = Skills::find($request->id);
         if ($skill) {
             if ($skill->image) {
-                $imagePath = str_replace('/storage/', '', $skill->image);
-                if (Storage::disk('public')->exists($imagePath)) {
-                    Storage::disk('public')->delete($imagePath);
+                $oldImageName = basename($skill->image);
+                $oldPath = public_path('assets/images/skills/' . $oldImageName);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
                 }
             }
             $skill->delete();

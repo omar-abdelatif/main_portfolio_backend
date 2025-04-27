@@ -407,7 +407,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="category-table" class="table table-striped align-middle" data-page-length="10">
+                <table id="table" class="table table-striped align-middle" data-page-length="10">
                     <thead>
                         <tr>
                             <th class="text-center text-white">Name</th>
@@ -725,6 +725,11 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-12">
+                                                                <?php if(isset($project->image)): ?>
+                                                                    <div class="view-image my-3">
+                                                                        <img src="<?php echo e(asset($project->image)); ?>" width="80" class="rounded" alt="<?php echo e($project->name); ?>">
+                                                                    </div>
+                                                                <?php endif; ?>
                                                                 <div class="form-group mt-2">
                                                                     <?php if (isset($component)) { $__componentOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale3da9d84bb64e4bc2eeebaafabfb2581 = $attributes; } ?>
