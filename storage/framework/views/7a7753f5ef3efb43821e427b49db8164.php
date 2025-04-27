@@ -2,6 +2,14 @@
     Profile
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('breadcrumb-title'); ?>
+    <h3>Profile</h3>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('breadcrumb-items'); ?>
+    <li class="breadcrumb-item active">Profile</li>
+<?php $__env->stopSection(); ?>
+
 <?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
 <?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -12,12 +20,7 @@
 <?php $attributes = $attributes->except(\App\View\Components\AppLayout::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
-     <?php $__env->slot('header', null, []); ?> 
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            <?php echo e(__('Profile')); ?>
-
-        </h2>
-     <?php $__env->endSlot(); ?>
+    
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
