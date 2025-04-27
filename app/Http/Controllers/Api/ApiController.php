@@ -6,7 +6,6 @@ use App\Models\About;
 use App\Models\Social;
 use App\Models\Pricing;
 use App\Models\Projects;
-use App\Mail\ContactMail;
 use App\Models\PaymentMethods;
 use App\Http\Controllers\Controller;
 
