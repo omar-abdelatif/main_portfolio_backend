@@ -69,6 +69,7 @@ Route::middleware('api.key')->prefix('api/v1')->group(function () {
         Route::get('/pricing/plans', 'PricingPlan');
         Route::get('/social/links', 'socialLinks');
         Route::get('/payment/methods', 'paymentMethods');
+        Route::get('/about', 'aboutDev');
     });
 });
 require __DIR__.'/auth.php';
