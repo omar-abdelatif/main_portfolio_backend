@@ -35,11 +35,11 @@
                             <div class="col-lg-6">
                                 <div class="form-group mb-2">
                                     <x-input-label for="project_name" value="Project Name" class="form-label" />
-                                    <x-text-input id="project_name" type="text" name="name" placeholder="Project Name"/>
+                                    <x-text-input id="project_name" type="text" name="name" placeholder="Project Name" class="text-white"/>
                                 </div>
                                 <div class="form-group mb-2">
                                     <x-input-label for="project_url" value="Project Url" />
-                                    <x-text-input id="project_url" type="url" name="link" placeholder="Project Url"/>
+                                    <x-text-input id="project_url" type="url" name="link" placeholder="Project Url" class="text-white"/>
                                 </div>
                                 <div class="form-group">
                                     <x-input-label for="tags" value="Project Tags" />
