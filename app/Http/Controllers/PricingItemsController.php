@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PricingItemsController extends Controller
 {
     public function index($pricing_plan_id) {
-        $plan = Pricing::find($pricing_plan_id)->first();
+        $plan = Pricing::find($pricing_plan_id);
         if($plan){
             $items = PricingItems::where('pricing_plan_id', $pricing_plan_id)->get();
             return view('pages.pricing.plan_details', compact('items', 'plan'));
@@ -21,8 +21,8 @@ class PricingItemsController extends Controller
         ]);
         if($validated){
             $plan = Pricing::find($pricing_plan_id);
-            $planId = $plan->id;
-            if($plan){
+            if ($plan) {
+                $planId = $plan->id;
                 if($request->name){
                     $featureName = $request->input('name');
                     foreach($featureName as $name){
