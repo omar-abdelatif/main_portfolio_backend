@@ -27,11 +27,11 @@
                         @csrf
                         <div class="form-group mb-2">
                             <x-input-label for="plan_name" value="Plan Name" class="form-label" />
-                            <x-text-input id="plan_name" type="text" name="name" placeholder="Plan Name"/>
+                            <x-text-input class="text-white" id="plan_name" type="text" name="name" placeholder="Plan Name"/>
                         </div>
                         <div class="form-group mb-2">
                             <x-input-label for="plan_price" value="Plan price" />
-                            <x-text-input id="plan_price" type="price" name="price" placeholder="Plan price"/>
+                            <x-text-input class="text-white" id="plan_price" type="price" name="price" placeholder="Plan price"/>
                         </div>
                         <div class="modal-footer mt-3">
                             <x-secondary-button class="rounded" data-bs-dismiss="modal">Close</x-secondary-button>
@@ -86,11 +86,11 @@
                                                         <input type="hidden" name="id" value="{{$plan->id}}">
                                                         <div class="form-group mb-2">
                                                             <x-input-label for="plan_name" value="Plan Name" class="form-label" />
-                                                            <x-text-input id="plan_name" type="text" name="name" value="{{$plan->name}}"/>
+                                                            <x-text-input class="text-white" id="plan_name" type="text" name="name" value="{{$plan->name}}"/>
                                                         </div>
                                                         <div class="form-group mb-2">
                                                             <x-input-label for="plan_price" value="Plan price" />
-                                                            <x-text-input id="plan_price" type="price" name="price" value="{{$plan->price}}"/>
+                                                            <x-text-input class="text-white" id="plan_price" type="price" name="price" value="{{$plan->price}}"/>
                                                         </div>
                                                         <div class="modal-footer mt-3">
                                                             <x-secondary-button class="rounded" data-bs-dismiss="modal">Close</x-secondary-button>

@@ -29,7 +29,7 @@
                             <div class="form-group">
                                 <x-input-label for="plan_name" value="Plan Name" class="form-label" />
                                 <div class="d-flex align-items-center">
-                                    <x-text-input id="plan_name" type="text" name="name[]" placeholder="Plan Name" class="w-full" required />
+                                    <x-text-input id="plan_name" type="text" name="name[]" placeholder="Plan Name" class="w-full text-white" required />
                                     <button type="button" class="btn btn-success px-2 py-2 ms-2 add-feature">
                                         <i class="fas fa-plus"></i>
                                     </button>
@@ -89,7 +89,7 @@
                                                         @csrf
                                                         <div class="form-group">
                                                             <x-input-label for="plan_name" value="Plan Name" class="form-label" />
-                                                            <x-text-input id="plan_name" type="text" name="title" value="{{$item->title}}"/>
+                                                            <x-text-input class="text-white" id="plan_name" type="text" name="title" value="{{$item->title}}"/>
                                                         </div>
                                                         <div class="modal-footer mt-3">
                                                             <x-secondary-button class="rounded" data-bs-dismiss="modal">Close</x-secondary-button>
