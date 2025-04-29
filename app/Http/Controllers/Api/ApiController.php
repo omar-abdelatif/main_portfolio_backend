@@ -22,8 +22,8 @@ class ApiController extends Controller
         }
     }
     public function PricingPlan(){
-        $plan = Pricing::all();
-        return response()->json($plan);
+        $plans = Pricing::with('items')->get();
+        return response()->json($plans);
     }
     public function socialLinks(){
         $socials = Social::all();
