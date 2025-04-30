@@ -10,8 +10,7 @@ use App\Models\Projects;
 use App\Models\PaymentMethods;
 use App\Http\Controllers\Controller;
 
-class ApiController extends Controller
-{
+class ApiController extends Controller {
     public function allProjects(){
         $projects = Projects::all();
         return response()->json($projects);
