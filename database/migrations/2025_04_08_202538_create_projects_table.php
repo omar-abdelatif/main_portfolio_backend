@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('category');
             $table->enum('subcategory', ['web', 'mobile', 'desktop']);
+            $table->string('github_url');
             $table->text('description');
             $table->foreignId('categories_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Projects;
 use App\Models\Categories;
+use App\Models\Projects;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -17,11 +17,12 @@ class ProjectsController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
             'link' => 'required|url',
             'tags' => 'required|string|max:255',
             'category' => 'required|string|max:255',
+            'github_url' => 'nullable|url',
             'subcategory' => 'required|string|max:255',
         ]);
         $slug = Str::slug($request->name, '-');
@@ -41,6 +42,7 @@ class ProjectsController extends Controller
             'tags' => $request->tags,
             'image' => $imageUrl,
             'category' => $request->category,
+            'github_url' => $request->github_url,
             'description' => $request->description,
             'categories_id' => $category->id,
         ]);
@@ -82,6 +84,7 @@ class ProjectsController extends Controller
                 'link' => $request->link,
                 'tags' => json_encode(array_map(fn($tag) => ['value' => $tag], $tags)),
                 'category' => $request->category,
+                'github_url' => $request->github_url,
                 'subcategory' => $request->subcategory,
                 'description' => $request->description,
                 'categories_id' => $category->id,

@@ -66,12 +66,16 @@
                                     </x-select>
                                 </div>
                                 <div class="form-group">
-                                    <x-input-label for="project_description" value="Project Description" />
-                                    <x-textarea name="description" id="project_description" rows="1" placeholder="Project Description"></x-textarea>
+                                    <label for="github_url" class="form-label fw-bold">GitHub URL</label>
+                                    <x-text-input id="github_url" type="url" name="github_url" placeholder="GitHub URL" class="text-white"/>
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="form-group mt-2">
+                                <div class="form-group my-3">
+                                    <x-input-label for="project_description" value="Project Description" />
+                                    <x-textarea name="description" id="project_description" rows="3" placeholder="Project Description"></x-textarea>
+                                </div>
+                                <div class="form-group">
                                     <x-input-label for="project_image" value="Project Image" />
                                     <x-text-input type="file" name="image" id="project_image" accept="image/*" />
                                 </div>
@@ -186,12 +190,16 @@
                                                                         <option value="desktop" {{$project->subcategory === 'desktop' ? 'selected' : ''}}>Desktop</option>
                                                                     </x-select>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <x-input-label for="project_description" value="Project Description" />
-                                                                    <x-textarea name="description" id="project_description" rows="1" placeholder="Project Description" value="{{$project->description}}"></x-textarea>
+                                                                <div class="form-group mt-2">
+                                                                    <label for="github_url" class="form-label fw-bold">GitHub URL</label>
+                                                                    <x-text-input id="github_url" type="url" name="github_url" value="{{$project->github_url}}" placeholder="GitHub URL" class="text-white"/>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-12">
+                                                                <div class="form-group my-3">
+                                                                    <x-input-label for="project_description" value="Project Description" />
+                                                                    <x-textarea name="description" id="project_description" rows="3" placeholder="Project Description" value="{{$project->description}}"></x-textarea>
+                                                                </div>
                                                                 @isset($project->image)
                                                                     <div class="view-image my-3">
                                                                         <img src="{{asset($project->image)}}" width="80" class="rounded" alt="{{$project->name}}">

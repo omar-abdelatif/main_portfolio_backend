@@ -13,8 +13,9 @@ class Projects extends Model
         'tags',
         'image',
         'category',
-        'subcategory',
+        'github_url',
         'description',
+        'subcategory',
         'categories_id',
     ];
     public function categories() {
