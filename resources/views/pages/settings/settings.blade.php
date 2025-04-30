@@ -79,13 +79,28 @@
                                                 <input type="number" name="phone" id="phone" class="form-control" placeholder="Developer Phone" value="{{$aboutdata->phone}}">
                                             </div>
                                             @isset($aboutdata->about_img)
-                                            <div class="view-img text-center mb-3">
-                                                <img src="{{asset($aboutdata->about_img)}}" class="img-fluid" width="80" alt="{{$aboutdata->name}} Image">
-                                            </div>
+                                                <div class="view-img text-center mb-3">
+                                                    <img src="{{asset($aboutdata->about_img)}}" class="img-fluid" width="80" alt="{{$aboutdata->name}} Image">
+                                                </div>
                                             @endisset
                                             <div class="form-group mb-3">
                                                 <label for="aboutt-img" class="form-label fw-bold">About Image</label>
                                                 <input type="file" name="about_img" id="about-img" class="form-control" accept="image/*" value="{{$aboutdata->about_img}}">
+                                            </div>
+                                            @isset($aboutdata->about_cv)
+                                                <div class="pdf-view my-3 text-center">
+                                                    <a href="{{$aboutdata->about_cv}}" target="blank">
+                                                        <img src="{{asset('assets/images/pdf.png')}}" width="100" height="100" alt="pdf image">
+                                                    </a>
+                                                </div>
+                                            @endisset
+                                            <div class="form-group mb-3">
+                                                <label for="about-cv" class="form-label fw-bold">Developer CV</label>
+                                                <input type="file" name="about_cv" id="about-cv" class="form-control" accept="application/pdf" value="{{$aboutdata->about_cv}}">
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="about-desc" class="form-label fw-bold">Developer Description</label>
+                                                <textarea name="description" class="form-control" id="about-desc" cols="30" rows="10">{{$aboutdata->description}}</textarea>
                                             </div>
                                             <div class="form-footer">
                                                 <button type="submit" class="btn btn-primary mt-3 w-100 fw-bold fs-6">Save</button>

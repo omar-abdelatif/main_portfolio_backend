@@ -132,9 +132,12 @@ class SettingController extends Controller
             'position' => 'required|string|max:255',
             'nationality' => 'required|string|max:1000',
             'about_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'about_cv' => 'nullable|mimes:pdf|max:10240',
+            'description' => 'nullable|string',
         ]);
         $about = About::first();
         $imageUrl = null;
+        $cvUrl = null;
         if ($request->hasFile('about_img')) {
             if ($about && $about->about_img) {
                 $oldImageName = basename($about->about_img);
@@ -149,6 +152,20 @@ class SettingController extends Controller
             $imageFile->move(public_path($destinationPath), $imageName);
             $imageUrl = asset($destinationPath . $imageName);
         }
+        if ($request->hasFile('about_cv')) {
+            if ($about && $about->about_cv) {
+                $oldImageName = basename($about->about_cv);
+                $oldPath = public_path('assets/images/about-cv/' . $oldImageName);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
+            $cvFile = $request->file('about_cv');
+            $cvName = time() . '.' . $cvFile->extension();
+            $destinationPath = 'assets/files/about-cv/';
+            $cvFile->move(public_path($destinationPath), $cvName);
+            $cvUrl = asset($destinationPath . $cvName);
+        }
         if ($about) {
             $about->name = $request->name;
             $about->email = $request->email;
@@ -158,6 +175,10 @@ class SettingController extends Controller
             if ($imageUrl) {
                 $about->about_img = $imageUrl;
             }
+            if ($cvUrl) {
+                $about->about_cv = $cvUrl;
+            }
+            $about->description = $request->description;
             $save = $about->save();
             if ($save) {
                 sweetalert()->success('Updated Successfully', [
@@ -174,7 +195,9 @@ class SettingController extends Controller
                 'phone' => $request->phone,
                 'position' => $request->position,
                 'nationality' => $request->nationality,
-                'about_img' => $imageUrl,
+                'about_img' => NULL,
+                'about_cv' => NULL,
+                'description' => $request->description,
             ]);
             if ($store) {
                 sweetalert()->success('Added Successfully', [

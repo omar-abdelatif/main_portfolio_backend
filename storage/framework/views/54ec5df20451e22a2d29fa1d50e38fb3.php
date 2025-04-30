@@ -88,13 +88,28 @@
                                                 <input type="number" name="phone" id="phone" class="form-control" placeholder="Developer Phone" value="<?php echo e($aboutdata->phone); ?>">
                                             </div>
                                             <?php if(isset($aboutdata->about_img)): ?>
-                                            <div class="view-img text-center mb-3">
-                                                <img src="<?php echo e(asset($aboutdata->about_img)); ?>" class="img-fluid" width="80" alt="<?php echo e($aboutdata->name); ?> Image">
-                                            </div>
+                                                <div class="view-img text-center mb-3">
+                                                    <img src="<?php echo e(asset($aboutdata->about_img)); ?>" class="img-fluid" width="80" alt="<?php echo e($aboutdata->name); ?> Image">
+                                                </div>
                                             <?php endif; ?>
                                             <div class="form-group mb-3">
                                                 <label for="aboutt-img" class="form-label fw-bold">About Image</label>
                                                 <input type="file" name="about_img" id="about-img" class="form-control" accept="image/*" value="<?php echo e($aboutdata->about_img); ?>">
+                                            </div>
+                                            <?php if(isset($aboutdata->about_cv)): ?>
+                                                <div class="pdf-view my-3 text-center">
+                                                    <a href="<?php echo e($aboutdata->about_cv); ?>" target="blank">
+                                                        <img src="<?php echo e(asset('assets/images/pdf.png')); ?>" width="100" height="100" alt="pdf image">
+                                                    </a>
+                                                </div>
+                                            <?php endif; ?>
+                                            <div class="form-group mb-3">
+                                                <label for="about-cv" class="form-label fw-bold">Developer CV</label>
+                                                <input type="file" name="about_cv" id="about-cv" class="form-control" accept="application/pdf" value="<?php echo e($aboutdata->about_cv); ?>">
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="about-desc" class="form-label fw-bold">Developer Description</label>
+                                                <textarea name="description" class="form-control" id="about-desc" cols="30" rows="10"><?php echo e($aboutdata->description); ?></textarea>
                                             </div>
                                             <div class="form-footer">
                                                 <button type="submit" class="btn btn-primary mt-3 w-100 fw-bold fs-6">Save</button>

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('nationality');
             $table->string('phone');
             $table->string('about_img')->nullable();
+            $table->string('about_cv')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
