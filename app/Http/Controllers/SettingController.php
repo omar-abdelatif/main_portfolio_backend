@@ -57,7 +57,6 @@ class SettingController extends Controller
             $socialLink->status = $request->has($statusField) ? 'active' : 'inactive';
             $imageField = $platform . '_image';
             if ($request->hasFile($imageField)) {
-                // Delete old image if exists
                 if ($socialLink->platform_icon) {
                     $oldImageName = basename($socialLink->platform_icon);
                     $oldPath = public_path('assets/images/social-icons/' . $oldImageName);

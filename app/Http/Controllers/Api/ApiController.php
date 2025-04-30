@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\About;
+use App\Models\Skills;
 use App\Models\Social;
 use App\Models\Pricing;
 use App\Models\Projects;
@@ -37,4 +38,9 @@ class ApiController extends Controller
         $about = About::all();
         return response()->json($about);
     }
+    public function allSkills(){
+        $skills = Skills::all();
+        return response()->json($skills);
+    }
+    public function sendEmail(){}
 }
