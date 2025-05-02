@@ -7,7 +7,9 @@ use App\Models\Skills;
 use App\Models\Social;
 use App\Models\Pricing;
 use App\Models\Projects;
+use Illuminate\Http\Request;
 use App\Models\PaymentMethods;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 
 class ApiController extends Controller {
@@ -41,5 +43,22 @@ class ApiController extends Controller {
         $skills = Skills::all();
         return response()->json($skills);
     }
-    public function sendEmail(){}
+    public function sendEmail(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|numeric',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+        try {
+            Mail::send('pages.emails.contact', $validated, function ($message) use ($validated) {
+                $message->to('omaraboregela100@gmail.com')->subject($validated['subject']);
+            });
+            return response()->json(['message' => 'Email sent successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to send email', 'error' => $e->getMessage()], 500);
+        }
+    }
 }
