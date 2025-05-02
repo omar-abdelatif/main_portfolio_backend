@@ -62,14 +62,4 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
         Route::get('/skills/delete/{id}', 'destroy')->name('skills.destroy');
     });
 });
-Route::middleware('api.key')->prefix('api/v1')->group(function () {
-    Route::controller(ApiController::class)->group(function () {
-        Route::get('/projects', 'allProjects');
-        Route::get('/projects/{slug}', 'projectDetails');
-        Route::get('/pricing/plans', 'PricingPlan');
-        Route::get('/social/links', 'socialLinks');
-        Route::get('/payment/methods', 'paymentMethods');
-        Route::get('/about', 'aboutDev');
-    });
-});
 require __DIR__.'/auth.php';
