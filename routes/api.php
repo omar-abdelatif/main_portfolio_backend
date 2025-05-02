@@ -15,5 +15,3 @@ Route::middleware('api.key')->prefix('v1')->group(function () {
         Route::get('/projects/project_details/{slug}', 'projectDetails')->name('api.project.details');
     });
 });
-Route::controller(ApiController::class)->group(function () {
-});
