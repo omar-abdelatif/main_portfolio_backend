@@ -105,36 +105,36 @@
             <div class="message-info">
                 <div class="message-field">
                     <span class="field-label">Name:</span>
-                    <div class="field-value">{{ $data['name'] }}</div>
+                    <div class="field-value">{{ $data['name'] ?? 'غير متوفر' }}</div>
                 </div>
 
                 <div class="message-field">
                     <span class="field-label">Email:</span>
-                    <div class="field-value">{{ $data['email'] }}</div>
+                    <div class="field-value">{{ $data['email'] ?? 'غير متوفر' }}</div>
                 </div>
 
                 @if(isset($data['phone']))
                 <div class="message-field">
                     <span class="field-label">Phone:</span>
-                    <div class="field-value">{{ $data['phone'] }}</div>
+                    <div class="field-value">{{ $data['phone'] ?? 'غير متوفر' }}</div>
                 </div>
                 @endif
 
                 @if(isset($data['subject']))
                 <div class="message-field">
                     <span class="field-label">Subject:</span>
-                    <div class="field-value">{{ $data['subject'] }}</div>
+                    <div class="field-value">{{ $data['subject'] ?? 'غير متوفر' }}</div>
                 </div>
                 @endif
 
                 <div class="message-field">
                     <span class="field-label">Message:</span>
-                    <div class="message-content">{{ $data['message'] }}</div>
+                    <div class="message-content">{{ $data['message'] ?? 'غير متوفر' }}</div>
                 </div>
 
                 <div class="message-field">
                     <span class="field-label">Sent on:</span>
-                    <div class="field-value">{{ date('F j, Y, g:i a') }}</div>
+                    <div class="field-value">{{ \Carbon\Carbon::now()->translatedFormat('j F Y - g:i A') }}</div>
                 </div>
             </div>
 

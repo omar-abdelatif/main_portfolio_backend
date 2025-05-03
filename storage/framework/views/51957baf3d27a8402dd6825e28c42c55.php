@@ -105,36 +105,36 @@
             <div class="message-info">
                 <div class="message-field">
                     <span class="field-label">Name:</span>
-                    <div class="field-value"><?php echo e($data['name']); ?></div>
+                    <div class="field-value"><?php echo e($data['name'] ?? 'غير متوفر'); ?></div>
                 </div>
 
                 <div class="message-field">
                     <span class="field-label">Email:</span>
-                    <div class="field-value"><?php echo e($data['email']); ?></div>
+                    <div class="field-value"><?php echo e($data['email'] ?? 'غير متوفر'); ?></div>
                 </div>
 
                 <?php if(isset($data['phone'])): ?>
                 <div class="message-field">
                     <span class="field-label">Phone:</span>
-                    <div class="field-value"><?php echo e($data['phone']); ?></div>
+                    <div class="field-value"><?php echo e($data['phone'] ?? 'غير متوفر'); ?></div>
                 </div>
                 <?php endif; ?>
 
                 <?php if(isset($data['subject'])): ?>
                 <div class="message-field">
                     <span class="field-label">Subject:</span>
-                    <div class="field-value"><?php echo e($data['subject']); ?></div>
+                    <div class="field-value"><?php echo e($data['subject'] ?? 'غير متوفر'); ?></div>
                 </div>
                 <?php endif; ?>
 
                 <div class="message-field">
                     <span class="field-label">Message:</span>
-                    <div class="message-content"><?php echo e($data['message']); ?></div>
+                    <div class="message-content"><?php echo e($data['message'] ?? 'غير متوفر'); ?></div>
                 </div>
 
                 <div class="message-field">
                     <span class="field-label">Sent on:</span>
-                    <div class="field-value"><?php echo e(date('F j, Y, g:i a')); ?></div>
+                    <div class="field-value"><?php echo e(\Carbon\Carbon::now()->translatedFormat('j F Y - g:i A')); ?></div>
                 </div>
             </div>
 
