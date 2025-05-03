@@ -116,19 +116,19 @@
                 </div>
 
                 @if(isset($data['phone']))
-                <div class="message-field">
-                    <pre>{{ print_r($data, true) }}</pre>
-                    <span class="field-label">Phone:</span>
-                    <div class="field-value">{{ $data['phone']}}</div>
-                </div>
+                    <div class="message-field">
+                        <pre>{{ print_r($data, true) }}</pre>
+                        <span class="field-label">Phone:</span>
+                        <div class="field-value">{{ $data['phone']}}</div>
+                    </div>
                 @endif
 
                 @if(isset($data['subject']))
-                <div class="message-field">
-                    <pre>{{ print_r($data, true) }}</pre>
-                    <span class="field-label">Subject:</span>
-                    <div class="field-value">{{ $data['subject']}}</div>
-                </div>
+                    <div class="message-field">
+                        <pre>{{ print_r($data, true) }}</pre>
+                        <span class="field-label">Subject:</span>
+                        <div class="field-value">{{ $data['subject']}}</div>
+                    </div>
                 @endif
 
                 <div class="message-field">
