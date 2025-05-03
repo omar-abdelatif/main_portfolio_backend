@@ -61,6 +61,5 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
         Route::post('/skills/update', 'update')->name('skills.update');
         Route::get('/skills/delete/{id}', 'destroy')->name('skills.destroy');
     });
-    Route::view('/email-template', 'pages.emails.contact');
 });
 require __DIR__.'/auth.php';

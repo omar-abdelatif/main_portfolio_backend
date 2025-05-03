@@ -7,6 +7,7 @@ use App\Models\Skills;
 use App\Models\Social;
 use App\Models\Pricing;
 use App\Models\Projects;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethods;
 use Illuminate\Support\Facades\Mail;
@@ -53,9 +54,7 @@ class ApiController extends Controller {
             'message' => 'required|string',
         ]);
         try {
-            Mail::send('pages.emails.contact', $validated, function ($message) use ($validated) {
-                $message->to('omaraboregela100@gmail.com')->subject($validated['subject']);
-            });
+            Mail::send(new ContactMail($validated));
             return response()->json(['message' => 'Email sent successfully'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed to send email', 'error' => $e->getMessage()], 500);

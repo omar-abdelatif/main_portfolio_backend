@@ -105,31 +105,31 @@
             <div class="message-info">
                 <div class="message-field">
                     <span class="field-label">Name:</span>
-                    <div class="field-value">{{ $data['name'] ?? 'غير متوفر' }}</div>
+                    <div class="field-value">{{ $data['name']}}</div>
                 </div>
 
                 <div class="message-field">
                     <span class="field-label">Email:</span>
-                    <div class="field-value">{{ $data['email'] ?? 'غير متوفر' }}</div>
+                    <div class="field-value">{{ $data['email']}}</div>
                 </div>
 
                 @if(isset($data['phone']))
                 <div class="message-field">
                     <span class="field-label">Phone:</span>
-                    <div class="field-value">{{ $data['phone'] ?? 'غير متوفر' }}</div>
+                    <div class="field-value">{{ $data['phone']}}</div>
                 </div>
                 @endif
 
                 @if(isset($data['subject']))
                 <div class="message-field">
                     <span class="field-label">Subject:</span>
-                    <div class="field-value">{{ $data['subject'] ?? 'غير متوفر' }}</div>
+                    <div class="field-value">{{ $data['subject']}}</div>
                 </div>
                 @endif
 
                 <div class="message-field">
                     <span class="field-label">Message:</span>
-                    <div class="message-content">{{ $data['message'] ?? 'غير متوفر' }}</div>
+                    <div class="message-content">{{ $data['message']}}</div>
                 </div>
 
                 <div class="message-field">
@@ -138,7 +138,7 @@
                 </div>
             </div>
 
-            <p>You can reply directly to this email to respond to {{ $data['name'] ?? 'غير متوفر' }}.</p>
+            <p>You can reply directly to this email to respond to {{ $data['name']}}.</p>
 
             <a href="mailto:{{ $data['email'] ?? 'omaraboregela100@gmail.com' }}" class="cta-button" style="display:inline-block; background-color:#3182ce; color:white; text-decoration:none; padding:10px 20px; border-radius:4px;">Reply Now</a>
         </div>
