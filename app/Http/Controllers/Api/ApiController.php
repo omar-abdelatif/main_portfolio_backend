@@ -55,7 +55,7 @@ class ApiController extends Controller {
         ]);
         try {
             Mail::send('pages.emails.contact', $validated, function ($message) use ($validated) {
-                $message->to('omaraboregela100@gmail.com')->subject('New Contact Request')->with('data', $validated);
+                $message->to('omaraboregela100@gmail.com')->subject('New Contact Request');
             });
             return response()->json(['message' => 'Email sent successfully'], 200);
         } catch (\Exception $e) {
