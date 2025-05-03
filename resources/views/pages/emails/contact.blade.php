@@ -104,17 +104,20 @@
 
             <div class="message-info">
                 <div class="message-field">
+                    <pre>{{ print_r($data, true) }}</pre>
                     <span class="field-label">Name:</span>
                     <div class="field-value">{{ $data['name']}}</div>
                 </div>
 
                 <div class="message-field">
+                    <pre>{{ print_r($data, true) }}</pre>
                     <span class="field-label">Email:</span>
                     <div class="field-value">{{ $data['email']}}</div>
                 </div>
 
                 @if(isset($data['phone']))
                 <div class="message-field">
+                    <pre>{{ print_r($data, true) }}</pre>
                     <span class="field-label">Phone:</span>
                     <div class="field-value">{{ $data['phone']}}</div>
                 </div>
@@ -122,17 +125,20 @@
 
                 @if(isset($data['subject']))
                 <div class="message-field">
+                    <pre>{{ print_r($data, true) }}</pre>
                     <span class="field-label">Subject:</span>
                     <div class="field-value">{{ $data['subject']}}</div>
                 </div>
                 @endif
 
                 <div class="message-field">
+                    <pre>{{ print_r($data, true) }}</pre>
                     <span class="field-label">Message:</span>
                     <div class="message-content">{{ $data['message']}}</div>
                 </div>
 
                 <div class="message-field">
+                    <pre>{{ print_r($data, true) }}</pre>
                     <span class="field-label">Sent on:</span>
                     <div class="field-value">{{ \Carbon\Carbon::now()->translatedFormat('j F Y - g:i A') }}</div>
                 </div>
