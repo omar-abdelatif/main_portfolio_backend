@@ -140,7 +140,7 @@
 
             <p>You can reply directly to this email to respond to <?php echo e($data['name'] ?? 'غير متوفر'); ?>.</p>
 
-            <a href="mailto:<?php echo e($data['email'] ?? ''); ?>" class="cta-button" style="display:inline-block; background-color:#3182ce; color:white; text-decoration:none; padding:10px 20px; border-radius:4px;">Reply Now</a>
+            <a href="mailto:<?php echo e($data['email'] ?? 'omaraboregela100@gmail.com'); ?>" class="cta-button" style="display:inline-block; background-color:#3182ce; color:white; text-decoration:none; padding:10px 20px; border-radius:4px;">Reply Now</a>
         </div>
         <div class="email-footer">
             <p>&copy; <?php echo e(date('Y')); ?> Your Web Development Portfolio. All rights reserved.</p>
