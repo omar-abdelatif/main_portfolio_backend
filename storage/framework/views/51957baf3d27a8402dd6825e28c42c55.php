@@ -138,17 +138,12 @@
                 </div>
             </div>
 
-            <p>You can reply directly to this email to respond to <?php echo e($data['name']); ?>.</p>
+            <p>You can reply directly to this email to respond to <?php echo e($data['name'] ?? 'غير متوفر'); ?>.</p>
 
-            <a href="mailto:<?php echo e($data['email']); ?>" class="cta-button">Reply Now</a>
+            <a href="mailto:<?php echo e($data['email'] ?? ''); ?>" class="cta-button" style="display:inline-block; background-color:#3182ce; color:white; text-decoration:none; padding:10px 20px; border-radius:4px;">Reply Now</a>
         </div>
         <div class="email-footer">
             <p>&copy; <?php echo e(date('Y')); ?> Your Web Development Portfolio. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://github.com/your-github" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/in/your-linkedin" target="_blank">LinkedIn</a>
-                <a href="https://twitter.com/your-twitter" target="_blank">Twitter</a>
-            </div>
         </div>
     </div>
 </body>
