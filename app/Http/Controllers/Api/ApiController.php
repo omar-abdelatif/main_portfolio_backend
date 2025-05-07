@@ -19,7 +19,7 @@ class ApiController extends Controller {
         return response()->json($projects);
     }
     public function projectDetails($slug){
-        $project = Projects::where('slug', $slug)->first();
+        $project = Projects::where('slug', $slug)->with('testmonials')->first();
         if($project){
             return response()->json($project);
         }

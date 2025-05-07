@@ -21,4 +21,7 @@ class Projects extends Model
     public function categories() {
         return $this->belongsTo(Categories::class, 'categories_id');
     }
+    public function testmonials() {
+        return $this->hasOne(Testmonials::class, 'projects_id');
+    }
 }

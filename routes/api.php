@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\ApiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ApiController;
 
 Route::middleware('api.key')->prefix('v1')->group(function () {
     Route::controller(ApiController::class)->group(function () {

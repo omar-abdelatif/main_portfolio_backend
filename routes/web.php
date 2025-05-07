@@ -9,6 +9,7 @@ use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\PricingItemsController;
+use App\Http\Controllers\TestmonialsController;
 
 Route::view('/', 'auth.login');
 Route::get('/register', function () {
@@ -59,6 +60,12 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
         Route::post('/skills/store', 'store')->name('skills.store');
         Route::post('/skills/update', 'update')->name('skills.update');
         Route::get('/skills/delete/{id}', 'destroy')->name('skills.destroy');
+    });
+    Route::controller(TestmonialsController::class)->group(function () {
+        Route::get('/testmonials/{slug}', 'index')->name('testmonials.index');
+        Route::post('/testmonials/store', 'store')->name('testmonials.store');
+        Route::post('/testmonials/update', 'update')->name('testmonials.update');
+        Route::get('/testmonials/delete/{id}', 'destroy')->name('testmonials.destroy');
     });
 });
 require __DIR__.'/auth.php';
