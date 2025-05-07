@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class TestmonialsController extends Controller
 {
     public function index($slug) {
-        $project = Projects::where('slug', $slug)->first();
+        $project = Projects::where('slug', $slug)->with('testmonials')->first();
         return view('pages.testmonials.index', compact('project'));
     }
     public function store(Request $request) {
@@ -22,7 +22,7 @@ class TestmonialsController extends Controller
         if ($request->hasFile('image')) {
             $imageFile = $request->file('image');
             $imageName = time() . '_' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
-            $destinationPath = 'assets/images/testmonials/';
+            $destinationPath = 'assets/images/projects/testmonials/';
             $imageFile->move(public_path($destinationPath), $imageName);
             $imageUrl = asset($destinationPath . $imageName);
         }
@@ -42,6 +42,58 @@ class TestmonialsController extends Controller
                 ]);
                 return redirect()->back();
             }
+        }
+    }
+    public function update(Request $request)
+    {
+        $testmonial = Testmonials::find($request->id);
+        if ($testmonial) {
+            if ($request->hasFile('image')) {
+                if ($testmonial->image) {
+                    $oldImageName = basename($testmonial->image);
+                    $oldPath = public_path('assets/images/projects/testmonials/' . $oldImageName);
+                    if (file_exists($oldPath)) {
+                        unlink($oldPath);
+                    }
+                }
+                $imageFile = $request->file('image');
+                $imageName = time() . '_' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
+                $destinationPath = 'assets/images/projects/testmonials/';
+                $imageFile->move(public_path($destinationPath), $imageName);
+                $imageUrl = asset($destinationPath . $imageName);
+                $testmonial->image = $imageUrl;
+            }
+            $testmonial->name = $request->name;
+            $testmonial->content = $request->content;
+            $save = $testmonial->save();
+            if ($save) {
+                sweetalert()->success('Updated Successfully', [
+                    'customClass' => [
+                        'confirmButton' => 'text-white'
+                    ]
+                ]);
+                return redirect()->back();
+            }
+        }
+    }
+    public function destroy($id)
+    {
+        $testmonial = Testmonials::find($id);
+        if ($testmonial) {
+            if ($testmonial->image) {
+                $oldImageName = basename($testmonial->image);
+                $oldPath = public_path('assets/images/projects/testmonials/' . $oldImageName);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
+            $testmonial->delete();
+            sweetalert()->success('Deleted Successfully', [
+                'customClass' => [
+                    'confirmButton' => 'text-white'
+                ]
+            ]);
+            return redirect()->back();
         }
     }
 }
