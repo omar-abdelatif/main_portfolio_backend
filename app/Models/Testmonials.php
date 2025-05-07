@@ -8,6 +8,7 @@ class Testmonials extends Model
 {
     protected $fillable = [
         'name',
+        'position',
         'image',
         'content',
         'projects_id',

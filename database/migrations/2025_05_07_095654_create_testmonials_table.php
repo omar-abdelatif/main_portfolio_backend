@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('testmonials', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string("position")->nullable();
             $table->string('image')->nullable();
             $table->text('content');
             $table->foreignId('projects_id')->constrained('projects')->onDelete('cascade');

@@ -31,6 +31,10 @@
                             <x-text-input id="reviewer_name" type="text" name="name" placeholder="Reviewer Name" class="text-white"/>
                         </div>
                         <div class="form-group mb-3">
+                            <x-input-label for="reviewer_position" value="Reviewer Position" class="form-label" />
+                            <x-text-input id="reviewer_position" type="text" name="position" placeholder="Reviewer Position" class="text-white"/>
+                        </div>
+                        <div class="form-group mb-3">
                             <x-input-label for="reviewer_image" value="Reviewer Image" />
                             <x-text-input type="file" name="image" id="reviewer_image" accept="image/*" />
                         </div>
@@ -48,6 +52,7 @@
         </div>
     </div>
 @endsection
+
 <x-app-layout>
     @if ($errors->any())
         @foreach ($errors->all() as $error)
@@ -63,6 +68,7 @@
                     <thead>
                         <tr>
                             <th class="text-center text-white">Name</th>
+                            <th class="text-center text-white">Position</th>
                             <th class="text-center text-white">Image</th>
                             <th class="text-center text-white">Content</th>
                             <th class="text-center text-white">Actions</th>
@@ -72,6 +78,7 @@
                         @isset($project->testmonials->id)
                             <tr>
                                 <td class="text-center">{{$project->testmonials->name}}</td>
+                                <td class="text-center">{{$project->testmonials->position}}</td>
                                 <td class="text-center">
                                     @isset($project->testmonials->image)
                                         <img src="{{ asset($project->testmonials->image) }}" width="50" alt="Project-img">
@@ -97,6 +104,10 @@
                                                         <div class="form-group mb-3">
                                                             <x-input-label for="reviewer_name" value="Reviewer Name" class="form-label" />
                                                             <x-text-input id="reviewer_name" type="text" name="name" value="{{$project->testmonials->name}}" placeholder="Reviewer Name" class="text-white"/>
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <x-input-label for="reviewer_position" value="Reviewer Position" class="form-label" />
+                                                            <x-text-input id="reviewer_position" type="text" name="position" value="{{$project->testmonials->position}}" placeholder="Reviewer Position" class="text-white"/>
                                                         </div>
                                                         @isset($project->testmonials->image)
                                                             <div class="view-image my-3">

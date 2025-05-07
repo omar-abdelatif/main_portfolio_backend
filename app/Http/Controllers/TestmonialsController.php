@@ -15,6 +15,7 @@ class TestmonialsController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required|string|max:255',
+            'position' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'content' => 'required|string',
         ]);
@@ -30,6 +31,7 @@ class TestmonialsController extends Controller
         if ($project) {
             $store = Testmonials::create([
                 'name' => $request->name,
+                'position' => $request->position,
                 'image' => $imageUrl,
                 'content' => $request->content,
                 'projects_id' => $project->id,
@@ -64,6 +66,7 @@ class TestmonialsController extends Controller
                 $testmonial->image = $imageUrl;
             }
             $testmonial->name = $request->name;
+            $testmonial->position = $request->position;
             $testmonial->content = $request->content;
             $save = $testmonial->save();
             if ($save) {
