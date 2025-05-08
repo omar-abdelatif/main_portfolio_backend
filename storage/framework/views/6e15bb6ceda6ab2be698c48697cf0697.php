@@ -944,6 +944,25 @@
 <?php $component = $__componentOriginald09fdffb9eee934ffc5295e41874794a; ?>
 <?php unset($__componentOriginald09fdffb9eee934ffc5295e41874794a); ?>
 <?php endif; ?>
+                                    <?php if (isset($component)) { $__componentOriginald09fdffb9eee934ffc5295e41874794a = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginald09fdffb9eee934ffc5295e41874794a = $attributes; } ?>
+<?php $component = App\View\Components\Anchor::resolve(['route' => 'galleries.index','params' => ''.e($project->slug).'','icon' => 'fa-regular fa-image fa-xl'] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('anchor'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\Anchor::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['class' => 'btn-outline-info px-2']); ?> <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginald09fdffb9eee934ffc5295e41874794a)): ?>
+<?php $attributes = $__attributesOriginald09fdffb9eee934ffc5295e41874794a; ?>
+<?php unset($__attributesOriginald09fdffb9eee934ffc5295e41874794a); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginald09fdffb9eee934ffc5295e41874794a)): ?>
+<?php $component = $__componentOriginald09fdffb9eee934ffc5295e41874794a; ?>
+<?php unset($__componentOriginald09fdffb9eee934ffc5295e41874794a); ?>
+<?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

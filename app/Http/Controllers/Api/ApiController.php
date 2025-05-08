@@ -7,7 +7,6 @@ use App\Models\Skills;
 use App\Models\Social;
 use App\Models\Pricing;
 use App\Models\Projects;
-use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethods;
 use Illuminate\Support\Facades\Mail;
@@ -19,7 +18,7 @@ class ApiController extends Controller {
         return response()->json($projects);
     }
     public function projectDetails($slug){
-        $project = Projects::where('slug', $slug)->with('testmonials')->first();
+        $project = Projects::where('slug', $slug)->with('testmonials')->with('galleries')->first();
         if($project){
             return response()->json($project);
         }
@@ -54,7 +53,7 @@ class ApiController extends Controller {
             'message' => 'required|string',
         ]);
         try {
-            Mail::send('pages.emails.contact', ['data' => $validated], function ($message) use ($validated) {
+            Mail::send('pages.emails.contact', ['data' => $validated], function ($message) {
                 $message->to('omaraboregela100@gmail.com')->subject('New Contact Request');
             });
 

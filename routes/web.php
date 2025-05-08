@@ -8,8 +8,9 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\PricingItemsController;
 use App\Http\Controllers\TestmonialsController;
+use App\Http\Controllers\PricingItemsController;
+use App\Http\Controllers\ProjectGalleryController;
 
 Route::view('/', 'auth.login');
 Route::get('/register', function () {
@@ -66,6 +67,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
         Route::post('/testmonials/store', 'store')->name('testmonials.store');
         Route::post('/testmonials/update', 'update')->name('testmonials.update');
         Route::get('/testmonials/delete/{id}', 'destroy')->name('testmonials.destroy');
+    });
+    Route::controller(ProjectGalleryController::class)->group(function () {
+        Route::get('/galleries/{slug}', 'index')->name('galleries.index');
+        Route::post('/galleries/store', 'store')->name('galleries.store');
+        Route::get('/galleries/delete/{id}', 'destroy')->name('galleries.destroy');
     });
 });
 require __DIR__.'/auth.php';

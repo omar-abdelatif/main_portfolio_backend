@@ -245,6 +245,7 @@
                                         </div>
                                     </div>
                                     <x-anchor route="testmonials.index" class="btn-outline-success px-2" params="{{$project->slug}}" icon="fa-solid fa-eye fa-xl"></x-anchor>
+                                    <x-anchor route="galleries.index" class="btn-outline-info px-2" params="{{$project->slug}}" icon="fa-regular fa-image fa-xl"></x-anchor>
                                 </td>
                             </tr>
                         @endforeach

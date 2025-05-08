@@ -24,4 +24,7 @@ class Projects extends Model
     public function testmonials() {
         return $this->hasOne(Testmonials::class, 'projects_id');
     }
+    public function galleries() {
+        return $this->hasMany(ProjectGallery::class, 'projects_id');
+    }
 }
