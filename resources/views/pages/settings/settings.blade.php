@@ -146,7 +146,7 @@
                                         <form action="{{route('payment.update')}}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @php
-                                                $payments = ['paypal', 'instapay', 'vfCash', 'fawry'];
+                                                $payments = ['paypal', 'instapay', 'vfCash', 'paymob'];
                                             @endphp
                                             @foreach ($payments as $payment)
                                                 @php
