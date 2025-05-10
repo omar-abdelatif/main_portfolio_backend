@@ -156,7 +156,7 @@
                                         <form action="<?php echo e(route('payment.update')); ?>" method="POST" enctype="multipart/form-data">
                                             <?php echo csrf_field(); ?>
                                             <?php
-                                                $payments = ['paypal', 'instapay', 'vfCash', 'paymob'];
+                                                $payments = ['paypal', 'instapay', 'vfCash', 'paymob', 'fawry'];
                                             ?>
                                             <?php $__currentLoopData = $payments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php
