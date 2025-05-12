@@ -19,7 +19,7 @@ class ProjectsController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'link' => 'required|url',
+            'link' => 'nullable|url',
             'tags' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'github_url' => 'nullable|url',
