@@ -109,6 +109,8 @@ class ProjectsController extends Controller
                     unlink($oldPath);
                 }
             }
+            $projects->galleries()->delete();
+            $projects->testmonials()->delete();
             $delete = $projects->delete();
             if($delete){
                 sweetalert()->success('Deleted Successfully', [
