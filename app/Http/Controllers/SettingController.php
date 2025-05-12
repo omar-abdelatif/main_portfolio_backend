@@ -82,7 +82,7 @@ class SettingController extends Controller
         }
     }
     public function paymentUpdate(Request $request) {
-        $methods = ['paypal', 'instapay', 'vfCash', 'paymob', 'fawry'];
+        $methods = ['paypal', 'instapay', 'vodafoneCash', 'paymob', 'fawry'];
         $rules = [];
         foreach ($methods as $method) {
             $rules["payment_{$method}"] = 'nullable|string';
