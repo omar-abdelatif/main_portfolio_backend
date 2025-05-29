@@ -16,6 +16,7 @@ class Projects extends Model
         'github_url',
         'description',
         'subcategory',
+        'officiality_status',
         'categories_id',
     ];
     public function categories() {

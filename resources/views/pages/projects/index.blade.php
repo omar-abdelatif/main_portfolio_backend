@@ -75,9 +75,17 @@
                                     <x-input-label for="project_description" value="Project Description" />
                                     <x-textarea name="description" id="project_description" rows="3" placeholder="Project Description"></x-textarea>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mb-3">
                                     <x-input-label for="project_image" value="Project Image" />
                                     <x-text-input type="file" name="image" id="project_image" accept="image/*" />
+                                </div>
+                                <div class="form-group">
+                                    <x-input-label for="officiality_status" value="Project Officiality" />
+                                    <x-select name="officiality_status" id="officiality_status">
+                                        <option selected disabled>Select Status</option>
+                                        <option value="official">official</option>
+                                        <option value="unofficial">unofficial</option>
+                                    </x-select>
                                 </div>
                             </div>
                         </div>
@@ -202,12 +210,20 @@
                                                                 </div>
                                                                 @isset($project->image)
                                                                     <div class="view-image my-3">
-                                                                        <img src="{{asset($project->image)}}" width="80" class="rounded" alt="{{$project->name}}">
+                                                                        <img src="{{asset($project->image)}}" width="80" class="rounded" alt="{{$project->name}}"/>
                                                                     </div>
                                                                 @endisset
                                                                 <div class="form-group mt-2">
                                                                     <x-input-label for="project_image" value="Project Image" />
                                                                     <x-text-input type="file" name="image" id="project_image" value="{{$project->image}}" accept="image/*" />
+                                                                </div>
+                                                                <div class="form-group mt-2">
+                                                                    <x-input-label for="officiality_status" value="Project Officiality" />
+                                                                    <x-select name="officiality_status" id="officiality_status">
+                                                                        <option selected disabled>Select Status</option>
+                                                                        <option value="official" {{$project->officiality_status === 'official' ? ' selected' : ''}}>official</option>
+                                                                        <option value="unofficial" {{$project->officiality_status === 'unofficial' ? ' selected' : ''}}>unofficial</option>
+                                                                    </x-select>
                                                                 </div>
                                                             </div>
                                                         </div>

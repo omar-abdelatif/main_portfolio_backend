@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('subcategory', ['web', 'mobile', 'desktop']);
             $table->string('github_url');
             $table->text('description');
+            $table->enum('officiality_status', ['official', 'unofficial']);
             $table->foreignId('categories_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });

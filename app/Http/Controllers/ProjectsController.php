@@ -24,6 +24,7 @@ class ProjectsController extends Controller
             'category' => 'required|string|max:255',
             'github_url' => 'nullable|url',
             'subcategory' => 'required|string|max:255',
+            'officiality_status' => 'required'
         ]);
         $slug = Str::slug($request->name, '-');
         $category = Categories::where('name', $request->category)->first();
@@ -44,6 +45,7 @@ class ProjectsController extends Controller
             'category' => $request->category,
             'github_url' => $request->github_url,
             'description' => $request->description,
+            'officiality_status' => $request->officiality_status,
             'categories_id' => $category->id,
         ]);
         if($store){
@@ -87,6 +89,7 @@ class ProjectsController extends Controller
                 'github_url' => $request->github_url,
                 'subcategory' => $request->subcategory,
                 'description' => $request->description,
+                'officiality_status' => $request->officiality_status,
                 'categories_id' => $category->id,
             ]);
             if($update){
