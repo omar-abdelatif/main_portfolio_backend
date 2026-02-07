@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 
 class ApiController extends Controller {
     public function allProjects(){
-        $projects = Projects::all();
+        $projects = Projects::with('testmonials')->get();
         return response()->json($projects);
     }
     public function projectDetails($slug){
