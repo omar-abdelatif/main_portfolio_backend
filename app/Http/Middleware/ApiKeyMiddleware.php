@@ -10,6 +10,9 @@ class ApiKeyMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
+        if ($request->isMethod('OPTIONS')) {
+            return response()->json([], 200);
+        }
         $apiKey = $request->header('X-API-KEY');
 
         if (!$apiKey || !ApiKey::where('key', $apiKey)->exists()) {
